@@ -1,8 +1,7 @@
 ### Place information about your pack version here.
 ---
 name: kafka
-description: kafka
-version: 0.0.1
-author: jfryman
-email: jfryman@FryBook.local
-
+description: Integration adapter for Kafka
+version: 0.1.0
+author: StackStorm
+email: support@stackstorm.com
