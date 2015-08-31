@@ -32,3 +32,14 @@ st2 run kafka.produce hosts=localhost:9092 topic=meetings message='StackStorm me
 # Send JSON-formatted message
 st2 run kafka.produce hosts=localhost:9092 topic=test message='{"menu": {"id": "file"}}'
 ```
+
+## Known Issues
+Kafka `topic` should be registered before starting the sensor which listens on that topic.
+Publishing message to topic and then re-running sensor should work:
+```sh
+# Publishing first message automatically creates the topic
+st2 run kafka.produce hosts=localhost:9092 topic=test message=Hello1
+st2ctl restart
+# Sensor should see new message now
+st2 run kafka.produce hosts=localhost:9092 topic=test message=Hello2
+```
