@@ -1,3 +1,6 @@
-### Place configuration data for your pack here.
 ---
-
+message_sensor:
+  hosts: "localhost:9092"
+  topics:
+    - "test"
+  group_id: ""

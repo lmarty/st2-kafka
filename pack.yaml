@@ -1,7 +1,6 @@
-### Place information about your pack version here.
 ---
 name: kafka
-description: Integration adapter for Kafka
+description: Integration pack for Apache Kafka message broker
 keywords:
   - kafka
   - queuing
