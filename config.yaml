@@ -1,4 +1,7 @@
 ---
+hosts: "localhost:9092"
+client_id: ""
+
 message_sensor:
   hosts: "localhost:9092"
   topics:

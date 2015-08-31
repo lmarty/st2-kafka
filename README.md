@@ -19,6 +19,9 @@ When receives new data, it emits:
   * `key` - Message's key, used only for keyed messages (string).
 
 #### Configuration
+* `hosts` - Default hosts to send `produce` messages to in host:port format.
+            Comma-separated for several hosts. (ex: `localhost:9092`)
+* `client_id` - Default Client ID to send with each message payload.
 * message_sensor:
   * `hosts` - Kafka hostname(s) to connect in host:port format. Comma-separated for several hosts. (ex: `localhost:9092`)
   * `topics` - Listen for new messages on these topics, (ex: `['test', 'meetings']`)
@@ -28,9 +31,9 @@ When receives new data, it emits:
 Send message to Kafka queue:
 ```sh
 # Publish message to `meetings` topic
-st2 run kafka.produce hosts=localhost:9092 topic=meetings message='StackStorm meets Apache Kafka'
+st2 run kafka.produce topic=meetings message='StackStorm meets Apache Kafka'
 # Send JSON-formatted message
-st2 run kafka.produce hosts=localhost:9092 topic=test message='{"menu": {"id": "file"}}'
+st2 run kafka.produce topic=test message='{"menu": {"id": "file"}}'
 ```
 
 ## Known Issues
@@ -38,8 +41,8 @@ Kafka `topic` should be registered before starting the sensor which listens on t
 Publishing message to topic and then re-running sensor should work:
 ```sh
 # Publishing first message automatically creates the topic
-st2 run kafka.produce hosts=localhost:9092 topic=test message=Hello1
+st2 run kafka.produce topic=test message=Hello1
 st2ctl restart
 # Sensor should see new message now
-st2 run kafka.produce hosts=localhost:9092 topic=test message=Hello2
+st2 run kafka.produce topic=test message=Hello2
 ```

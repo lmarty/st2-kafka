@@ -7,7 +7,7 @@ class ProduceMessageAction(Action):
     Action to send messages to Apache Kafka system.
     """
 
-    def run(self, hosts, topic, message):
+    def run(self, topic, message, hosts=None):
         """
         Simple round-robin synchronous producer to send one message to one topic.
 
@@ -23,7 +23,17 @@ class ProduceMessageAction(Action):
                   `offset` number and `error` code (hopefully 0).
         :rtype: ``dict``
         """
-        client = KafkaClient(hosts, client_id='st2-kafka-producer')
+
+        if hosts:
+            _hosts = hosts
+        elif self.config.get('hosts', None):
+            _hosts = self.config['hosts']
+        else:
+            raise ValueError("Need to define 'hosts' in either action or in config")
+
+        _client_id = self.config.get('client_id', 'st2-kafka-producer')
+
+        client = KafkaClient(_hosts, client_id=_client_id)
         client.ensure_topic_exists(topic)
         producer = SimpleProducer(client)
         result = producer.send_messages(topic, kafka_bytestring(message))
