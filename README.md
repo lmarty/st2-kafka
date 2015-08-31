@@ -21,7 +21,7 @@ When receives new data, it emits:
 #### Configuration
 * message_sensor:
   * `hosts` - Kafka hostname(s) to connect in host:port format. Comma-separated for several hosts. (ex: `localhost:9092`)
-  * `topics` - Topics to listen for new messages, (ex: `['test', 'meetings']`)
+  * `topics` - Listen for new messages on these topics, (ex: `['test', 'meetings']`)
   * `group_id` - Consumer group (default: `st2-kafka-producer`)
 
 ## Examples
@@ -29,7 +29,6 @@ Send message to Kafka queue:
 ```sh
 # Publish message to `meetings` topic
 st2 run kafka.produce hosts=localhost:9092 topic=meetings message='StackStorm meets Apache Kafka'
-
 # Send JSON-formatted message
 st2 run kafka.produce hosts=localhost:9092 topic=test message='{"menu": {"id": "file"}}'
 ```
