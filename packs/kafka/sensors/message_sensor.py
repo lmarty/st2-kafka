@@ -9,6 +9,8 @@ class KafkaMessageSensor(Sensor):
     If responded topic message is JSON - try to convert it to object for reuse inside st2.
     """
     TRIGGER = 'kafka.new_message'
+    DEFAULT_GROUP_ID = 'st2-sensor-group'
+    DEFAULT_CLIENT_ID = 'st2-kafka-consumer'
 
     def __init__(self, sensor_service, config=None):
         """
@@ -29,7 +31,9 @@ class KafkaMessageSensor(Sensor):
         if not self._topics:
             raise ValueError('[KafkaMessageSensor]: "message_sensor.topics" should list at least one topic!')
 
-        self._group_id = message_sensor.get('group_id') or 'st2-consumer-group'
+        # set defaults for empty values
+        self._group_id = message_sensor.get('group_id') or self.DEFAULT_GROUP_ID
+        self._client_id = message_sensor.get('client_id') or self.DEFAULT_CLIENT_ID
         self._consumer = None
 
     def setup(self):
@@ -38,7 +42,7 @@ class KafkaMessageSensor(Sensor):
         """
         self._logger.debug('[KafkaMessageSensor]: Initializing consumer ...')
         self._consumer = KafkaConsumer(*self._topics,
-                                       client_id='st2-kafka-sensor',
+                                       client_id=self._client_id,
                                        group_id=self._group_id,
                                        bootstrap_servers=self._hosts,
                                        deserializer_class=self._try_deserialize)

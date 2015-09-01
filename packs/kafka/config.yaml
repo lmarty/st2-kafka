@@ -1,9 +1,10 @@
 ---
 hosts: "localhost:9092"
-client_id: ""
+client_id:
 
 message_sensor:
   hosts: "localhost:9092"
   topics:
     - "test"
-  group_id: ""
+  group_id:
+  client_id:
