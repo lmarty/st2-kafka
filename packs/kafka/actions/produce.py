@@ -6,6 +6,7 @@ class ProduceMessageAction(Action):
     """
     Action to send messages to Apache Kafka system.
     """
+    DEFAULT_CLIENT_ID = 'st2-kafka-producer'
 
     def run(self, topic, message, hosts=None):
         """
@@ -31,7 +32,8 @@ class ProduceMessageAction(Action):
         else:
             raise ValueError("Need to define 'hosts' in either action or in config")
 
-        _client_id = self.config.get('client_id', 'st2-kafka-producer')
+        # set default for empty value
+        _client_id = self.config.get('client_id') or self.DEFAULT_CLIENT_ID
 
         client = KafkaClient(_hosts, client_id=_client_id)
         client.ensure_topic_exists(topic)

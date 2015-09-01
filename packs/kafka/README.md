@@ -21,11 +21,12 @@ When receives new data, it emits:
 #### Configuration
 * `hosts` - Default hosts to send `produce` messages to in host:port format.
             Comma-separated for several hosts. (ex: `localhost:9092`)
-* `client_id` - Default Client ID to send with each message payload.
+* `client_id` - Client ID to send with each message payload (default: `st2-kafka-producer`).
 * message_sensor:
   * `hosts` - Kafka hostname(s) to connect in host:port format. Comma-separated for several hosts. (ex: `localhost:9092`)
   * `topics` - Listen for new messages on these topics, (ex: `['test', 'meetings']`)
-  * `group_id` - Consumer group (default: `st2-kafka-producer`)
+  * `group_id` - Consumer group (default: `st2-sensor-group`)
+  * `client_id` - Client ID to identify application making the request (default: `st2-kafka-consumer`).
 
 ## Examples
 Send message to Kafka queue:
