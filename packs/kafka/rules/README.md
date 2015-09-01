@@ -5,7 +5,7 @@ The rules folder contains rules. See [Rules](http://docs.stackstorm.com/rules.ht
 
 Example rule [`parse_message.yaml`](parse_message.yaml) with criteria filters based on received message from Kafka.
 
-`KafkaMessageSensor` listens to `test` topic (see [config.yaml](/config.yaml)) of `localhost:9092`
+`KafkaMessageSensor` listens to `test` topic (see [config.yaml](./../config.yaml)) of `localhost:9092`
 Kafka host and when new message appears, it emits `kafka.new_message` trigger into StackStorm engine.
 Additionally sensor detects if received message is JSON and converts it to object,
 to reuse in st2 rules/workflows with filters and criteria. 
