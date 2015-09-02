@@ -12,7 +12,8 @@ to reuse in st2 rules/workflows with filters and criteria.
 
 ##### 1. Install this pack
 ```sh
-st2 run packs.install packs=kafka repo_url=stackstorm/st2-kafka subtree=true register=actions,rules,sensors
+st2 run packs.install packs=kafka repo_url=stackstorm/st2-kafka subtree=true
+st2ctl reload --register-all
 ```
 
 ##### 2. Enable `parse_message` rule
