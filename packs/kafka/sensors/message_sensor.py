@@ -27,7 +27,7 @@ class KafkaMessageSensor(Sensor):
         if not self._hosts:
             raise ValueError('[KafkaMessageSensor]: "message_sensor.hosts" config value is required!')
 
-        self._topics = message_sensor.get('topics', [])
+        self._topics = set(message_sensor.get('topics', []))
         if not self._topics:
             raise ValueError('[KafkaMessageSensor]: "message_sensor.topics" should list at least one topic!')
 
@@ -85,7 +85,10 @@ class KafkaMessageSensor(Sensor):
             self._consumer.commit()
 
     def cleanup(self):
-        pass
+        """
+        Close connection, just to be sure.
+        """
+        self._consumer._client.close()
 
     def add_trigger(self, trigger):
         pass
