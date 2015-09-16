@@ -9,12 +9,17 @@ trigger_types:
       type: object
       properties:
         topic:
+          description: "Category from which message was retrieved"
           type: string
         message:
+          description: "Captured message. JSON-serialized messages are automatically parsed"
           type: object
         partition:
+          description: "Topic partition number message belongs to"
           type: integer
         offset:
+          description: "Consumer offset for current topic. Position of what has been consumed"
           type: integer
         key:
+          description: "Message's key (only for keyed messages)"
           type: string
