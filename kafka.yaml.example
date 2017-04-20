@@ -1,12 +1,12 @@
 ---
 # Used by the produce action
-hosts: "172.16.1.10:9092"
-client_id: "st2testclient_id"
-
+client_id: testclientID
+hosts: 172.16.1.10:9092
 # Used for the sensor
 message_sensor:
-  hosts: "172.16.1.10:9092"
+  client_id: testclientID
+  group_id: testgroupID
+  hosts: 172.16.1.10:9092
   topics:
-    - "test"
-  group_id: "st2testgroup_id"
-  client_id: "st2testclient_id"
+  - digital_logging_os
+  - test
