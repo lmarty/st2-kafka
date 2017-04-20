@@ -1,0 +1,12 @@
+---
+# Used by the produce action
+hosts: "localhost:9092"
+client_id: "st2testclient_id"
+
+# Used for the sensor
+message_sensor:
+  hosts: "localhost:9092"
+  topics:
+    - "test"
+  group_id: "st2testgroup_id"
+  client_id: "st2testclient_id"
