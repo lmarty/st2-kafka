@@ -13,8 +13,8 @@
   message_sensor:
     description: "Sensor specific settings"
     type: "object"
-    required: false
-    additionalProperties: false
+    required: true
+    additionalProperties: true
     properties:
       hosts:
         description: "List of Kafka brokers hosts:port for sensor to connect to"
